@@ -4,7 +4,6 @@ package game
 trait MoveControl[T] {
   self: Board[T] =>
 
-
   /**
    * Move tile to zero element
    *

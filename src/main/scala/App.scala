@@ -4,10 +4,9 @@ import game.impl.IntegerBoard
 import game.Board
 import console.impl.IntegerBoardView
 import console.BoardView
-import controller.Continue
+import controller.Start
 import controller.impl.GameController
-
-import com.wix.interview.console.io.{ConsoleIO, IO}
+import console.io.{ConsoleIO, IO}
 
 object App {
 
@@ -17,6 +16,6 @@ object App {
     val consoleIO: IO = new ConsoleIO
     val controller = new GameController(board, view, consoleIO)
 
-    controller.gameLoop(Continue)
+    controller.gameLoop(Start)
   }
 }

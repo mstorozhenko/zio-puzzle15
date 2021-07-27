@@ -2,9 +2,9 @@ package com.wix.interview
 package console.io
 
 trait IO {
-  def readChar(): Char
+  def read(): Char
 
-  def printLine(s: String): Unit
+  def print(s: String): Unit
 
   def clearScreen(): Unit
 }

@@ -1,10 +1,9 @@
 package com.wix.interview
 package controller.impl
 
-import controller.{Continue, Controller, Mode, Terminate, Win}
+import controller.{Continue, Controller, Mode, Start, Terminate, Win, WrongInput}
 import game.{Board, MoveDown, MoveLeft, MoveRight, MoveUp}
 import console.BoardView
-
 import console.io.IO
 
 class GameController[T](board: Board[T], view: BoardView[T], io: IO) extends Controller {
@@ -15,7 +14,7 @@ class GameController[T](board: Board[T], view: BoardView[T], io: IO) extends Con
     case 'a' => if (board.moveTile(MoveLeft)) Win else Continue
     case 'd' => if (board.moveTile(MoveRight)) Win else Continue
     case 'q' => Terminate
-    case _ => Continue
+    case _ => WrongInput
   }
 
   override def render(): String = view.renderBoard(board)
@@ -23,12 +22,20 @@ class GameController[T](board: Board[T], view: BoardView[T], io: IO) extends Con
   override def gameLoop(m: Mode): Unit = {
     m match {
       case Terminate =>
-      case Win => io.printLine("You win!")
+      case Win => io.print("You win!")
       case Continue =>
+        io.print(render())
+        val nextMode = processInput(io.read())
         io.clearScreen()
-        io.printLine(render())
-        val nextMode = processInput(io.readChar())
         gameLoop(nextMode)
+      case WrongInput =>
+        io.clearScreen()
+        io.print("Wrong input. User WASD controls to move tiles")
+        gameLoop(Continue)
+      case Start =>
+        io.clearScreen()
+        io.print("Welcome to puzzle15 game. Use WASD scheme for moving tiles. Type 'q' for quitting game")
+        gameLoop(Continue)
     }
   }
 }
