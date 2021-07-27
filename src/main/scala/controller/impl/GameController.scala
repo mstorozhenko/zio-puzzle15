@@ -10,11 +10,11 @@ import console.io.IO
 class GameController[T](board: Board[T], view: BoardView[T], io: IO) extends Controller {
 
   override def processInput(s: Char): Mode = s match {
-    case "w" => if (board.moveTile(MoveUp)) Win else Continue
-    case "s" => if (board.moveTile(MoveDown)) Win else Continue
-    case "a" => if (board.moveTile(MoveLeft)) Win else Continue
-    case "d" => if (board.moveTile(MoveRight)) Win else Continue
-    case "q" => Terminate
+    case 'w' => if (board.moveTile(MoveUp)) Win else Continue
+    case 's' => if (board.moveTile(MoveDown)) Win else Continue
+    case 'a' => if (board.moveTile(MoveLeft)) Win else Continue
+    case 'd' => if (board.moveTile(MoveRight)) Win else Continue
+    case 'q' => Terminate
     case _ => Continue
   }
 
