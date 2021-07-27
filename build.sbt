@@ -1,9 +1,11 @@
-name := "puzzle15"
+import Dependencies._
 
-version := "1.0"
+ThisBuild / organization := "com.wix"
+ThisBuild / scalaVersion := "2.13.6"
+ThisBuild / version := "1.0"
 
-scalaVersion := "2.13.6"
-
-idePackagePrefix := Some("com.wix.interview")
-
-libraryDependencies += "org.fusesource.jansi" % "jansi" % "2.3.4"
+lazy val root = (project in file("."))
+  .settings(
+    name := "puzzle15",
+    libraryDependencies ++= List(zio),
+  )
