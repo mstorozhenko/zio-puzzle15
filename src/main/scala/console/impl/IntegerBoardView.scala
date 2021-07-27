@@ -1,9 +1,7 @@
-package com.wix.interview
 package console.impl
 
 import console.BoardView
 import game.Board
-
 
 class IntegerBoardView extends BoardView[Int] {
   val cellLength = 3

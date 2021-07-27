@@ -1,4 +1,3 @@
-package com.wix.interview
 package game
 
 sealed trait MoveDirection

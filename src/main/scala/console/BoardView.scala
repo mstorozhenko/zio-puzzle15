@@ -1,4 +1,3 @@
-package com.wix.interview
 package console
 
 import game.Board

@@ -1,10 +1,9 @@
-package com.wix.interview
 package controller.impl
 
-import controller.{Continue, Controller, Mode, Start, Terminate, Win, WrongInput}
-import game.{Board, MoveDown, MoveLeft, MoveRight, MoveUp}
 import console.BoardView
 import console.io.IO
+import controller.{Continue, Controller, Mode, Start, Terminate, Win, WrongInput}
+import game.{Board, MoveDown, MoveLeft, MoveRight, MoveUp}
 
 class GameController[T](board: Board[T], view: BoardView[T], io: IO) extends Controller {
 

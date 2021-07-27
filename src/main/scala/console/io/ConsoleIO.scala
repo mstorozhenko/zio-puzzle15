@@ -1,4 +1,3 @@
-package com.wix.interview
 package console.io
 
 import jline.console.ConsoleReader

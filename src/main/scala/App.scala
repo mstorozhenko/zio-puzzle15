@@ -1,5 +1,3 @@
-package com.wix.interview
-
 import game.impl.IntegerBoard
 import game.Board
 import console.impl.IntegerBoardView

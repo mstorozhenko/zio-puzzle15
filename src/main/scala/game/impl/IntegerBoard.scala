@@ -1,10 +1,7 @@
-package com.wix.interview
 package game.impl
 
 import game.Board
-
 import game.util.ZeroIndex
-
 import scala.annotation.tailrec
 import scala.util.Random
 

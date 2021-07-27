@@ -1,4 +1,3 @@
-package com.wix.interview
 package game.util
 
 case class ZeroIndex(var i: Int, var j: Int, size: Int) {
