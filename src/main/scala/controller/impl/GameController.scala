@@ -16,11 +16,10 @@ class GameController[T](board: Board[T], view: BoardView[T], io: IO) extends Con
     case _ => WrongInput
   }
 
-  override def render(): String = view.renderBoard(board)
+  override def render(): String = view.renderBoard(board) + "\nType 'q' to quit"
 
   override def gameLoop(m: Mode): Unit = {
     m match {
-      case Terminate =>
       case Win => io.print("You win!")
       case Continue =>
         io.print(render())
@@ -35,6 +34,7 @@ class GameController[T](board: Board[T], view: BoardView[T], io: IO) extends Con
         io.clearScreen()
         io.print("Welcome to puzzle15 game. Use WASD scheme for moving tiles. Type 'q' for quitting game")
         gameLoop(Continue)
+      case Terminate =>
     }
   }
 }

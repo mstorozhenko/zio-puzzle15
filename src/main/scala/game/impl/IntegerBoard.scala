@@ -1,20 +1,20 @@
 package game.impl
 
 import game.Board
-import game.util.ZeroIndex
+import game.util.{Index2D, Random}
+import game.util.Properties.{maxBoardSize, minBoardSize}
+
 import scala.annotation.tailrec
-import scala.util.Random
 
-class IntegerBoard(val size: Int) extends Board[Int] {
+class IntegerBoard(val size: Int, rnd: Random[Int] = Random[Int]) extends Board[Int] {
 
-  // this grid size just comes from top of my head, grid 20x20 seams too big for any 'standard' player
-  assert(size > 2 && size < 20, "Grid size should be 1 < x < 20")
+  assert(size > minBoardSize && size < maxBoardSize, s"Grid size should be $minBoardSize < x < $maxBoardSize")
 
   override val zero: Int = 0
-  override var zeroElementIndex: ZeroIndex = ZeroIndex(0, 0, size)
+  override var zeroElementIndex: Index2D = Index2D(0, 0, size)
 
   val board: Array[Array[Int]] = {
-    val r = Random.shuffle(Array.range(0, size * size))
+    val r = rnd.shuffle(Array.range(0, size * size))
 
     @tailrec
     def fillBoard(s: Array[Int], acc: Array[Array[Int]], i: Int): Array[Array[Int]] = {
@@ -29,7 +29,7 @@ class IntegerBoard(val size: Int) extends Board[Int] {
       }
     }
 
-    fillBoard(r.toArray, Array.ofDim[Int](size, size), 0)
+    fillBoard(r, Array.ofDim[Int](size, size), 0)
   }
 
   override def balanced: Boolean = board.flatten.take(size * size - 1) sameElements Array.range(1, size * size)

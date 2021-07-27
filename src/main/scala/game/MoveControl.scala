@@ -23,20 +23,20 @@ trait MoveControl[T] {
     move match {
       case MoveUp =>
         swap(zeroElementIndex.i + 1, zeroElementIndex.j)
-        checkWin()
+        checkWin
       case MoveDown =>
         swap(zeroElementIndex.i - 1, zeroElementIndex.j)
-        checkWin()
+        checkWin
       case MoveLeft =>
         swap(zeroElementIndex.i, zeroElementIndex.j + 1)
-        checkWin()
+        checkWin
       case MoveRight =>
         swap(zeroElementIndex.i, zeroElementIndex.j - 1)
-        checkWin()
+        checkWin
     }
   }
 
-  def checkWin(): Boolean = {
+  def checkWin: Boolean = {
     (zeroElementIndex.i == size - 1 && zeroElementIndex.j == size - 1) && balanced
   }
 

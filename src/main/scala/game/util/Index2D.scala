@@ -1,6 +1,6 @@
 package game.util
 
-case class ZeroIndex(var i: Int, var j: Int, size: Int) {
+case class Index2D(var i: Int, var j: Int, size: Int) {
   def set(i: Int, j: Int): (Int, Int) = {
     assert(i < size && i >= 0 && j < size && j >= 0, "i, j should be 0 <= (i,j) < size")
 

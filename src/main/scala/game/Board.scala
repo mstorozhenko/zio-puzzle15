@@ -1,9 +1,9 @@
 package game
 
-import game.util.ZeroIndex
+import game.util.Index2D
 
 trait Board[T] extends MoveControl[T] {
-  var zeroElementIndex: ZeroIndex
+  var zeroElementIndex: Index2D
 
   val zero: T
 

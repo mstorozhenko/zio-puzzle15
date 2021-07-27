@@ -10,6 +10,7 @@ lazy val root = (project in file("."))
     libraryDependencies ++= List(
       jline,
       //Test
-      scalaTest
+      scalaTest,
+      mockito
     ),
   )
