@@ -3,6 +3,6 @@ package console
 
 import game.Board
 
-trait BoardView {
-  def drawBoard(board: Board[Int]): String
+trait BoardView[T] {
+  def renderBoard(board: Board[T]): String
 }

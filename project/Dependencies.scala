@@ -1,5 +1,5 @@
 import sbt._
 
 object Dependencies {
-  val zio = "dev.zio" %% "zio" % "1.0.9"
+  val jline = "jline" % "jline" % "2.14.6"
 }

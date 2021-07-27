@@ -7,5 +7,5 @@ ThisBuild / version := "1.0"
 lazy val root = (project in file("."))
   .settings(
     name := "puzzle15",
-    libraryDependencies ++= List(zio),
+    libraryDependencies ++= List(jline),
   )

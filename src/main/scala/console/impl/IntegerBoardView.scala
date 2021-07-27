@@ -5,10 +5,10 @@ import console.BoardView
 import game.Board
 
 
-class IntegerBoardView extends BoardView {
+class IntegerBoardView extends BoardView[Int] {
   val cellLength = 3
 
-  def drawBoard(b: Board[Int]): String = {
+  def renderBoard(b: Board[Int]): String = {
     s"""
        |${
       b.board.map(t =>
