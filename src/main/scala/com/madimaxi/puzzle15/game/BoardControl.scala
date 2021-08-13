@@ -1,7 +1,7 @@
 package com.madimaxi.puzzle15.game
 
 import izumi.reflect.Tag
-import zio.{Has, Task, UIO, ZIO}
+import zio.{Has, Task, ZIO}
 
 trait BoardControl[T] {
   /**

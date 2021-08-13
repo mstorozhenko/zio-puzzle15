@@ -4,7 +4,7 @@ import com.madimaxi.puzzle15.console.BoardView
 import com.madimaxi.puzzle15.controller.{Continue, Controller, Start, State, Terminate, Win, WrongInput}
 import com.madimaxi.puzzle15.game.{Board, BoardControl, MoveDirection, MoveDown, MoveLeft, MoveRight, MoveUp}
 import izumi.reflect.Tag
-import zio.{Function2ToLayerSyntax, Has, Task, URLayer, ZIO}
+import zio.{Function2ToLayerSyntax, Has, Task, URLayer}
 
 case class GameController[T](control: BoardControl[T], view: BoardView[T]) extends Controller[T] {
 

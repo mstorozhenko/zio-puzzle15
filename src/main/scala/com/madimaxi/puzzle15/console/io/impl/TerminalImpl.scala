@@ -3,7 +3,7 @@ package com.madimaxi.puzzle15.console.io.impl
 import com.madimaxi.puzzle15.console.io.Terminal
 import jline.console.ConsoleReader
 import zio.console.Console
-import zio.{Has, Task, ULayer, URLayer, ZLayer}
+import zio.{Has, Task, URLayer}
 
 case class TerminalImpl(console: Console.Service) extends Terminal {
   override def read(): Task[Char] = Task.effectTotal {

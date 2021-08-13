@@ -24,7 +24,7 @@ case class IntBoardControl(rnd: Random.Service) extends BoardControl[Int] {
       val row = board.indexWhere(_.contains(Empty))
       val cell = if (row > -1) board(row).indexOf(Empty) else -1
       if (row == -1 || cell == -1)
-        Task.fail(new RuntimeException("element not found"))
+        Task.fail(new RuntimeException("Element not found"))
       else Task.succeed((row, cell))
     }
   } yield Board(board, emptyIndex)
