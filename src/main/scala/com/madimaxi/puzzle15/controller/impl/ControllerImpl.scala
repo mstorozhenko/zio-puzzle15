@@ -6,7 +6,7 @@ import com.madimaxi.puzzle15.game.{Board, BoardControl, MoveDirection, MoveDown,
 import izumi.reflect.Tag
 import zio.{Function2ToLayerSyntax, Has, Task, URLayer}
 
-case class GameController[T](control: BoardControl[T], view: BoardView[T]) extends Controller[T] {
+case class ControllerImpl[T](control: BoardControl[T], view: BoardView[T]) extends Controller[T] {
 
   override def processInput(input: Char, s: State)(implicit ord: Ordering[T]): Task[State] = {
     def game(move: MoveDirection, board: Board[T]): Task[State] = {
@@ -48,7 +48,7 @@ case class GameController[T](control: BoardControl[T], view: BoardView[T]) exten
     }
 }
 
-object GameController {
+object ControllerImpl {
   def layer[T: Tag]: URLayer[Has[BoardControl[T]] with Has[BoardView[T]], Has[Controller[T]]] =
-    (GameController[T] _).toLayer
+    (ControllerImpl[T] _).toLayer
 }
