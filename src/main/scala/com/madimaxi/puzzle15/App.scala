@@ -3,8 +3,8 @@ package com.madimaxi.puzzle15
 import com.madimaxi.puzzle15.console.impl.IntBoardView
 import com.madimaxi.puzzle15.console.io.impl.TerminalImpl
 import com.madimaxi.puzzle15.controller.impl.GameController
-import com.madimaxi.puzzle15.controller.loop.Runner
-import com.madimaxi.puzzle15.controller.loop.impl.RunnerImpl
+import com.madimaxi.puzzle15.controller.run.Runner
+import com.madimaxi.puzzle15.controller.run.impl.RunnerImpl
 import com.madimaxi.puzzle15.controller.{Start, State}
 import com.madimaxi.puzzle15.game.impl.IntBoardControl
 import zio.{ExitCode, Has, Task, URIO, ZIO}

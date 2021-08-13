@@ -1,4 +1,4 @@
-package com.madimaxi.puzzle15.controller.loop
+package com.madimaxi.puzzle15.controller.run
 
 import com.madimaxi.puzzle15.controller.State
 import izumi.reflect.Tag

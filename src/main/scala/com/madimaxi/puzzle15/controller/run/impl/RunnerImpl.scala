@@ -1,8 +1,8 @@
-package com.madimaxi.puzzle15.controller.loop.impl
+package com.madimaxi.puzzle15.controller.run.impl
 
 import com.madimaxi.puzzle15.console.io.Terminal
 import com.madimaxi.puzzle15.controller.{Controller, State, Terminate}
-import com.madimaxi.puzzle15.controller.loop.Runner
+import com.madimaxi.puzzle15.controller.run.Runner
 import izumi.reflect.Tag
 import zio.{Function2ToLayerSyntax, Has, Task, URLayer}
 
