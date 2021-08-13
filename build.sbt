@@ -9,6 +9,7 @@ lazy val root = (project in file("."))
     name := "puzzle15",
     libraryDependencies ++= List(
       jline,
+      zio,
       //Test
       scalaTest,
       mockito
