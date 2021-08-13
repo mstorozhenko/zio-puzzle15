@@ -7,6 +7,7 @@ import zio.{Has, Task, URLayer}
 
 case class TerminalImpl(console: Console.Service) extends Terminal {
   override def read(): Task[Char] = Task.effectTotal {
+    //standard zio have only readLine, jline can readCharacter without pressing enter
     val console = new ConsoleReader()
     val l = console.readCharacter().toChar
     console.close()
