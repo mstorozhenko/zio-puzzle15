@@ -7,7 +7,7 @@ import com.madimaxi.puzzle15.controller.run.Runner
 import com.madimaxi.puzzle15.controller.run.impl.RunnerImpl
 import com.madimaxi.puzzle15.controller.{Start, State}
 import com.madimaxi.puzzle15.game.impl.IntBoardControl
-import zio.{ExitCode, Has, Task, URIO, ZIO}
+import zio._
 
 object App extends zio.App {
 
