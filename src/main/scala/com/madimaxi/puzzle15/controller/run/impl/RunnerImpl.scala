@@ -9,10 +9,10 @@ import zio._
 case class RunnerImpl[T](controller: Controller[T], terminal: Terminal) extends Runner[T] {
 
   override def start(s: State)(implicit ordering: Ordering[T]): IO[Unit, State] = for {
-    _ <- terminal.clearScreen()
-    frame <- controller.render(s)
-    _ <- terminal.print(frame)
-    input <- if (s == Terminate) IO.fail() else terminal.read()
+    _         <- terminal.clearScreen()
+    frame     <- controller.render(s)
+    _         <- terminal.print(frame)
+    input     <- if (s == Terminate) IO.fail() else terminal.read()
     nextState <- controller.processInput(input, s)
   } yield nextState
 }

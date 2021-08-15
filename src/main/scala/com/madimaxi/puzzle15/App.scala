@@ -13,19 +13,21 @@ object App extends zio.App {
 
   val program: ZIO[Has[Runner[Int]], Throwable, Any] = {
     def loop(state: State): ZIO[Has[Runner[Int]], Throwable, Any] =
-      Runner.start[Int](state).foldM(
-        _ => UIO.unit,
-        r => loop(r)
-      )
+      Runner
+        .start[Int](state)
+        .foldM(
+          _ => UIO.unit,
+          r => loop(r)
+        )
 
     loop(Start)
   }
 
-
-  override def run(args: List[String]): URIO[zio.ZEnv, ExitCode] = {
-    program.provideLayer(
-      ((IntBoardControl.layer ++ IntBoardView.layer >>> ControllerImpl.layer[Int]) ++ TerminalImpl.layer)
-        >>> RunnerImpl.layer[Int]
-    ).exitCode
-  }
+  override def run(args: List[String]): URIO[zio.ZEnv, ExitCode] =
+    program
+      .provideLayer(
+        ((IntBoardControl.layer ++ IntBoardView.layer >>> ControllerImpl.layer[Int]) ++ TerminalImpl.layer)
+          >>> RunnerImpl.layer[Int]
+      )
+      .exitCode
 }

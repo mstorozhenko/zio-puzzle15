@@ -4,6 +4,7 @@ import izumi.reflect.Tag
 import zio._
 
 trait BoardControl[T] {
+
   /**
    * Initialize new board with defined size
    */
@@ -27,8 +28,8 @@ trait BoardControl[T] {
     if (boardVal.last.indexOf(Empty) == boardVal.last.size - 1) // if empty tile not in last position - board incomplete
       boardVal.flatten.sortWith {
         case (Value(v1), Value(v2)) => ord.lteq(v1, v2)
-        case (Empty, Value(_)) => false
-        case _ => true
+        case (Empty, Value(_))      => false
+        case _                      => true
       } == boardVal.flatten
     else false
   }

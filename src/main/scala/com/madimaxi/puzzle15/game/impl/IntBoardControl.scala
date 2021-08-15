@@ -11,17 +11,17 @@ case class IntBoardControl(rnd: Random.Service) extends BoardControl[Int] {
    */
   override def init(size: Int, initMode: InitMode = Shuffled): UIO[Board[Int]] = for {
     shuffled <- initMode match {
-      case Shuffled => rnd.shuffle((0 until (size * size)).toList)
-      case Natural => UIO.succeed(0 until (size * size))
-    }
+                  case Shuffled => rnd.shuffle((0 until (size * size)).toList)
+                  case Natural  => UIO.succeed(0 until (size * size))
+                }
     board <- UIO.succeed(
-      shuffled
-        .sliding(size, size)
-        .toSeq
-        .map(_.map(t => if (t == 0) Empty else Value(t)))
-    )
+               shuffled
+                 .sliding(size, size)
+                 .toSeq
+                 .map(_.map(t => if (t == 0) Empty else Value(t)))
+             )
     emptyIndex <- {
-      val row = board.indexWhere(_.contains(Empty))
+      val row  = board.indexWhere(_.contains(Empty))
       val cell = if (row > -1) board(row).indexOf(Empty) else -1
       if (row == -1 || cell == -1) UIO.dieMessage("Element not found")
       else UIO.succeed((row, cell))
@@ -58,11 +58,14 @@ case class IntBoardControl(rnd: Random.Service) extends BoardControl[Int] {
     val size = board.value.size
     if (from._1 < size && from._1 >= 0 && from._2 < size && from._2 >= 0) {
       val flatten: Seq[Field[Int]] = board.value.flatten
-      Board(flatten
-        .updated(to._1 * size + to._2, flatten(from._1 * size + from._2))
-        .updated(from._1 * size + from._2, Empty)
-        .sliding(size, size)
-        .toSeq, from)
+      Board(
+        flatten
+          .updated(to._1 * size + to._2, flatten(from._1 * size + from._2))
+          .updated(from._1 * size + from._2, Empty)
+          .sliding(size, size)
+          .toSeq,
+        from
+      )
     } else board
   }
 }

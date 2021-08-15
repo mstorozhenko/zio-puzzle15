@@ -13,4 +13,3 @@ case object Start extends State
 case object Terminate extends State
 
 case object Win extends State
-
