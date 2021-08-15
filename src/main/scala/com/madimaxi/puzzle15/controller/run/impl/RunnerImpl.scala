@@ -4,15 +4,15 @@ import com.madimaxi.puzzle15.console.io.Terminal
 import com.madimaxi.puzzle15.controller.{Controller, State, Terminate}
 import com.madimaxi.puzzle15.controller.run.Runner
 import izumi.reflect.Tag
-import zio.{Function2ToLayerSyntax, Has, Task, URLayer}
+import zio._
 
-case class RunnerImpl[T](controller: Controller[T], console: Terminal) extends Runner[T] {
+case class RunnerImpl[T](controller: Controller[T], terminal: Terminal) extends Runner[T] {
 
-  override def start(s: State)(implicit ordering: Ordering[T]): Task[State] = for {
-    _ <- console.clearScreen()
+  override def start(s: State)(implicit ordering: Ordering[T]): IO[Unit, State] = for {
+    _ <- terminal.clearScreen()
     frame <- controller.render(s)
-    _ <- console.print(frame)
-    input <- if (s == Terminate) Task('q') else console.read()
+    _ <- terminal.print(frame)
+    input <- if (s == Terminate) IO.fail() else terminal.read()
     nextState <- controller.processInput(input, s)
   } yield nextState
 }

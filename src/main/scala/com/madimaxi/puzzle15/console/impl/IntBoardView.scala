@@ -2,12 +2,12 @@ package com.madimaxi.puzzle15.console.impl
 
 import com.madimaxi.puzzle15.console.BoardView
 import com.madimaxi.puzzle15.game.{Board, Empty, Value}
-import zio.{Has, Task, ULayer, ZLayer}
+import zio._
 
 case class IntBoardView() extends BoardView[Int] {
   private val cellLength = 3
 
-  def renderBoard(b: Board[Int]): Task[String] = Task.succeed(
+  def renderBoard(b: Board[Int]): UIO[String] = UIO.succeed(
     s"""
        |${
       b.value.map(t =>

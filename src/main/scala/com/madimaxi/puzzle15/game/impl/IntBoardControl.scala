@@ -1,7 +1,7 @@
 package com.madimaxi.puzzle15.game.impl
 
 import com.madimaxi.puzzle15.game._
-import zio.{Has, Task, URLayer}
+import zio._
 import zio.random.Random
 
 case class IntBoardControl(rnd: Random.Service) extends BoardControl[Int] {
@@ -9,12 +9,12 @@ case class IntBoardControl(rnd: Random.Service) extends BoardControl[Int] {
   /**
    * Initialize new board with defined size
    */
-  override def init(size: Int, initMode: InitMode = Shuffled): Task[Board[Int]] = for {
+  override def init(size: Int, initMode: InitMode = Shuffled): UIO[Board[Int]] = for {
     shuffled <- initMode match {
       case Shuffled => rnd.shuffle((0 until (size * size)).toList)
-      case Natural => Task.succeed(0 until (size * size))
+      case Natural => UIO.succeed(0 until (size * size))
     }
-    board: Seq[Seq[Field[Int]]] <- Task.succeed(
+    board <- UIO.succeed(
       shuffled
         .sliding(size, size)
         .toSeq
@@ -23,9 +23,8 @@ case class IntBoardControl(rnd: Random.Service) extends BoardControl[Int] {
     emptyIndex <- {
       val row = board.indexWhere(_.contains(Empty))
       val cell = if (row > -1) board(row).indexOf(Empty) else -1
-      if (row == -1 || cell == -1)
-        Task.fail(new RuntimeException("Element not found"))
-      else Task.succeed((row, cell))
+      if (row == -1 || cell == -1) UIO.dieMessage("Element not found")
+      else UIO.succeed((row, cell))
     }
   } yield Board(board, emptyIndex)
 
@@ -35,7 +34,7 @@ case class IntBoardControl(rnd: Random.Service) extends BoardControl[Int] {
    * @param move direction
    * @return true when move was winning, false - to continue com.madimaxi.puzzle15.game
    */
-  override def moveTile(move: MoveDirection, board: Board[Int]): Task[Board[Int]] =
+  override def moveTile(move: MoveDirection, board: Board[Int]): UIO[Board[Int]] =
     move match {
       case MoveUp =>
         swap(board, (board.emptyIndex._1 + 1, board.emptyIndex._2), board.emptyIndex)
@@ -55,7 +54,7 @@ case class IntBoardControl(rnd: Random.Service) extends BoardControl[Int] {
    * @param to    - Empty element index
    * @return new board with swapped elements
    */
-  private def swap(board: Board[Int], from: (Int, Int), to: (Int, Int)): Task[Board[Int]] = Task.succeed {
+  private def swap(board: Board[Int], from: (Int, Int), to: (Int, Int)): UIO[Board[Int]] = UIO.succeed {
     val size = board.value.size
     if (from._1 < size && from._1 >= 0 && from._2 < size && from._2 >= 0) {
       val flatten: Seq[Field[Int]] = board.value.flatten

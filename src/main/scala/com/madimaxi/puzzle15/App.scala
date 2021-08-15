@@ -14,12 +14,13 @@ object App extends zio.App {
   val program: ZIO[Has[Runner[Int]], Throwable, Any] = {
     def loop(state: State): ZIO[Has[Runner[Int]], Throwable, Any] =
       Runner.start[Int](state).foldM(
-        _ => Task.unit,
+        _ => UIO.unit,
         r => loop(r)
       )
 
     loop(Start)
   }
+
 
   override def run(args: List[String]): URIO[zio.ZEnv, ExitCode] = {
     program.provideLayer(

@@ -2,13 +2,13 @@ package com.madimaxi.puzzle15.console
 
 import com.madimaxi.puzzle15.game.Board
 import izumi.reflect.Tag
-import zio.{Has, Task, ZIO}
+import zio._
 
 trait BoardView[T] {
-  def renderBoard(board: Board[T]): Task[String]
+  def renderBoard(board: Board[T]): UIO[String]
 }
 
 object BoardView {
-  def renderBoard[T: Tag](board: Board[T]): ZIO[Has[BoardView[T]], Throwable, String] =
+  def renderBoard[T: Tag](board: Board[T]): ZIO[Has[BoardView[T]], Nothing, String] =
     ZIO.serviceWith[BoardView[T]](_.renderBoard(board))
 }

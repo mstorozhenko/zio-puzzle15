@@ -1,13 +1,13 @@
 package com.madimaxi.puzzle15.console.io
 
-import zio.{Has, Task, ZIO}
+import zio._
 
 trait Terminal {
-  def read(): Task[Char]
+  def read(): UIO[Char]
 
-  def print(s: String): Task[Unit]
+  def print(s: String): UIO[Unit]
 
-  def clearScreen(): Task[Unit]
+  def clearScreen(): UIO[Unit]
 }
 
 object Terminal {
