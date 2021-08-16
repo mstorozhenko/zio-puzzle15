@@ -3,3 +3,8 @@
 .bsp
 .idea
 target
+.metals/
+.bloop/
+.ammonite/
+metals.sbt
+.vscode
