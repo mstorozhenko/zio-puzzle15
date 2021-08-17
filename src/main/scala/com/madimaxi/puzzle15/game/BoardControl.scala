@@ -1,6 +1,5 @@
 package com.madimaxi.puzzle15.game
 
-import izumi.reflect.Tag
 import zio._
 
 trait BoardControl[T] {
@@ -35,13 +34,14 @@ trait BoardControl[T] {
   }
 }
 
-object BoardControl {
-  def init[T: Tag](size: Int, initMode: InitMode = Shuffled): ZIO[Has[BoardControl[T]], Nothing, Board[T]] =
-    ZIO.serviceWith[BoardControl[T]](_.init(size, initMode))
-
-  def moveTile[T: Tag](move: MoveDirection, board: Board[T]): ZIO[Has[BoardControl[T]], Nothing, Board[T]] =
-    ZIO.serviceWith[BoardControl[T]](_.moveTile(move, board))
-
-  def completed[T: Tag](board: Board[T])(implicit ord: Ordering[T]): ZIO[Has[BoardControl[T]], Nothing, Boolean] =
-    ZIO.serviceWith[BoardControl[T]](_.completed(board))
-}
+object BoardControl extends Accessible[BoardControl[_]]
+//{
+//  def init[T: Tag](size: Int, initMode: InitMode = Shuffled): ZIO[Has[BoardControl[T]], Nothing, Board[T]] =
+//    ZIO.serviceWith[BoardControl[T]](_.init(size, initMode))
+//
+//  def moveTile[T: Tag](move: MoveDirection, board: Board[T]): ZIO[Has[BoardControl[T]], Nothing, Board[T]] =
+//    ZIO.serviceWith[BoardControl[T]](_.moveTile(move, board))
+//
+//  def completed[T: Tag](board: Board[T])(implicit ord: Ordering[T]): ZIO[Has[BoardControl[T]], Nothing, Boolean] =
+//    ZIO.serviceWith[BoardControl[T]](_.completed(board))
+//}
