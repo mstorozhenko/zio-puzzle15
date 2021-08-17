@@ -12,11 +12,11 @@ case class IntBoardView() extends BoardView[Int] {
        |${b.value
       .map(t =>
         t.map {
-          case Empty    => String.format(s"\u001B[31m[%${cellLength}s] ", " ")
-          case Value(e) => String.format(s"\u001B[36m[%${cellLength}d] ", e)
+          case Empty    => String.format(s"${Console.RED}[%${cellLength}s] ", " ")
+          case Value(e) => String.format(s"${Console.CYAN}[%${cellLength}d] ", e)
         }.mkString
       )
-      .mkString("\u001B[0m\n")}\u001B[0m""".stripMargin
+      .mkString(s"${Console.RESET}\n")}${Console.RESET}""".stripMargin
   )
 }
 
